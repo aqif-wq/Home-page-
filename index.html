@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Evanston Medical Limited - Home</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #1a2a3a;
+      overflow-x: hidden;
+    }
+
+    /* Color Variables - Medical Theme */
+    :root {
+      --primary: #0f6e6b;
+      --primary-dark: #0a5250;
+      --primary-light: #2c9c98;
+      --secondary: #2c7da0;
+      --accent: #61a5c2;
+      --light-bg: #f0f7f6;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-600: #475569;
+      --gray-800: #1e293b;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Scroll Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      /* padding: 16px 0; */
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    /* Logo Area - Left Side */
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 100px;
+      height: 100px;
+    
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* box-shadow: var(--shadow-sm); */
+      overflow: hidden;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    .logo-icon .logo-fallback {
+      color: white;
+      font-weight: 800;
+      font-size: 22px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: none;
+    }
+
+    .logo-text h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-text p {
+      font-size: 0.7rem;
+      letter-spacing: 1.2px;
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+
+    /* Navigation Links - Right Side */
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--gray-800);
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Mobile Menu */
+    .menu-toggle {
+      display: none;
+      font-size: 1.6rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+        padding: 24px 0 16px;
+        text-align: center;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .nav-container {
+        padding: 0 20px;
+      }
+      .logo-text h2 {
+        font-size: 1rem;
+      }
+      .logo-text p {
+        font-size: 0.6rem;
+      }
+      .logo-icon {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    /* Hero Section with Background Image */
+    .hero {
+      background: linear-gradient(115deg, rgba(15, 110, 107, 0.76), rgba(44, 123, 160, 0.774)), url('/1.png');
+      background-size: cover;
+          background-position: center;
+      background-attachment: fixed;
+      padding: 100px 32px;
+      text-align: center;
+      position: relative;
+      color: black;
+      width: 100vw;
+      
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      color: white;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+      opacity: 0.95;
+      animation: fadeInUp 0.8s ease 0.1s forwards;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    .hero-btn {
+      background: white;
+      color: var(--primary);
+      border: none;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      background: var(--gray-50);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content p {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 48px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--primary-light);
+      margin: 16px auto 0;
+      border-radius: 3px;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 36px 28px;
+      border-radius: 24px;
+      text-align: center;
+      transition: all 0.4s ease;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-100);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-light);
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .feature-icon i {
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    .feature-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+    }
+
+    .feature-card p {
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* Info Section */
+    .info-section {
+      background: var(--light-bg);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .info-image img {
+      width: 100%;
+      border-radius: 28px;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.4s ease;
+    }
+
+    .info-image img:hover {
+      transform: scale(1.02);
+    }
+
+    .info-content h3 {
+      font-size: 2rem;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+    }
+
+    .info-content p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--gray-600);
+      margin-bottom: 24px;
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .info-list li i {
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .section {
+        padding: 50px 0;
+      }
+      .section-title {
+        font-size: 1.6rem;
+      }
+      .info-content h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Products Preview */
+    .products-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-100);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-img {
+      height: 220px;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h4 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: var(--gray-800);
+    }
+
+    .product-info p {
+      color: var(--primary);
+      /* font-weight: 700; */
+      margin-bottom: 16px;
+      font-size: small;
+    }
+
+    .product-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-weight: 600;
+    }
+
+    .product-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Footer */
+    footer {
+      background: #0a2e2c;
+      color: #cbd5e6;
+      padding: 60px 0 30px;
+      margin-top: 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--primary-light);
+    }
+
+    .footer-col p {
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      color: #cbd5e6;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        gap: 32px;
+      }
+    }
+
+    /* WhatsApp Float Button */
+    .whatsapp-float {
+     position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lg);
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 999;
+      animation: bounce 1.5s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      background: #128C7E;
+    }
+
+    .whatsapp-float i {
+      font-size: 2rem;
+      color: white;
+    }
+        @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      background: #128C7E;
+      /* animation: none; */
+    }
+    .whatsapp-float i {
+      font-size: 2rem;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <!-- Logo on LEFT side -->
+    <div class="logo-area">
+      <div class="logo-icon">
+        <img src="https://scontent.flhe1-1.fna.fbcdn.net/v/t39.30808-1/675272269_122106551120815993_1760746907231636058_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=100&ccb=1-7&_nc_sid=2d3e12&_nc_eui2=AeHlaZkTPHda0G1SxqpM56cX_Kjl2EdoCKH8qOXYR2gIofZDeWr8En2fYy8EYor7YCuWef_3Em5rmJYu3EW5Rhep&_nc_ohc=-0ZMwQEMnWMQ7kNvwFrS7dM&_nc_oc=AdqIEwwjYmuGY3-MjoRi4H3ME7gZ6jVCuNvqKcwkCf1VPyhTv6u2mWPUqyBL2ti3WkfowzZYzubnjUR3BiPNg1P7&_nc_zt=24&_nc_ht=scontent.flhe1-1.fna&_nc_gid=8tcTWylzOoLum4-kYLylWw&_nc_ss=7a3a8&oh=00_Af04ELHgC0mhP0to_KwKoWknzHcRTmReD7cMh6mJDbKSag&oe=69ED0E23" alt="Evanston Medical Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="logo-fallback" style="display: none;">EM</div>
+      </div>
+      <div class="logo-text">
+     
+      </div>
+    </div>
+    
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Navigation Links on RIGHT side -->
+    <div class="nav-links" id="navLinks">
+      <a href="#" class="active">Home</a>
+      <a href="/about.html">About Us</a>
+      <a href="/hot-sale.html">Hot Sale</a>
+      <a href="/shop.html">Shop</a>
+      <a href="/contact-us.html">Contact Us</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section with Background Image -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Premium Medical Equipment</h1>
+    <p>Trusted by healthcare professionals across the UK. Quality medical devices delivered to your doorstep. Order directly via WhatsApp for personalized service.</p>
+    <button class="hero-btn" onclick="alert('Shop page coming soon!')">
+      <i class="fas fa-stethoscope"></i> Explore Products
+    </button>
+  </div>
+</section>
+
+<!-- Features / Delivery Information -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Why Choose Evanston Medical?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-truck-medical"></i>
+        </div>
+        <h3>Fast Medical Delivery</h3>
+        <p>Express shipping across the UK. Orders processed within 24 hours. Free delivery on orders over £150.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fab fa-whatsapp"></i>
+        </div>
+        <h3>WhatsApp Ordering</h3>
+        <p>Simply click "Buy via WhatsApp" on any product. Chat directly with our medical team for quick ordering.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-certificate"></i>
+        </div>
+        <h3>CE & FDA Certified</h3>
+        <p>All our medical equipment meets strict quality and safety standards. Trusted by NHS and private clinics.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-headset"></i>
+        </div>
+        <h3>24/7 Support</h3>
+        <p>Our medical support team is always available via WhatsApp and email to assist with your inquiries.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About & Information Section -->
+<section class="section info-section">
+  <div class="container">
+    <div class="info-grid">
+      <div class="info-image">
+        <img src="https://beirbeauty.com/upload/big/_1_0_1568949110.jpg" alt="Medical Professional">
+      </div>
+      <div class="info-content">
+        <h3>About Evanston Medical Limited</h3>
+        <p>Established in 2012, Evanston Medical Limited has been a leading supplier of high-quality medical equipment and diagnostic tools to healthcare facilities across the United Kingdom. We pride ourselves on delivering excellence in healthcare products.</p>
+        <ul class="info-list">
+          <li><i class="fas fa-check-circle"></i> 10+ Years of Excellence</li>
+          <li><i class="fas fa-check-circle"></i> 500+ Healthcare Partners</li>
+          <li><i class="fas fa-check-circle"></i> 100% Genuine Products</li>
+          <li><i class="fas fa-check-circle"></i> Dedicated Medical Support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hot Sale Products Preview -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"> New Products Arrivals</h2>
+    <div class="products-preview">
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://beirbeauty.com/upload/big/_1_0_1585556230.jpg" alt="Digital BP Monitor">
+        </div>
+        <div class="product-info">
+          <h4>Digital BP Monitor</h4>
+          <p>This products added by aqif using HTML</p>
+          <button class="product-btn" onclick="whatsappOrder('Digital BP Monitor')">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+          </button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://beirbeauty.com/upload/big/1_MultiFunctionalfacialdermabrasionskinpeelbeautymachineforsalon_1746000008.jpg" alt="Stethoscope">
+        </div>
+        <div class="product-info">
+          <h4>Professional Stethoscope</h4>
+          <p>This products added by aqif using HTML</p>
+          <button class="product-btn" onclick="whatsappOrder('Professional Stethoscope')">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+          </button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://beirbeauty.com/upload/big/_1_0_1576033168.jpg" alt="Pulse Oximeter">
+        </div>
+        <div class="product-info">
+          <h4>Pulse Oximeter</h4>
+          <p>This products added by aqif using HTML</p>
+          <button class="product-btn" onclick="whatsappOrder('Pulse Oximeter')">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+          </button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <img src="https://beirbeauty.com/upload/big/_1_0_1576639165.jpg" alt="Hospital Bed">
+        </div>
+        <div class="product-info">
+          <h4>Electric Hospital Bed</h4>
+          <p>This products added by aqif using HTML</p>
+          <button class="product-btn" onclick="whatsappOrder('Electric Hospital Bed')">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Evanston Medical Ltd</h4>
+        <p>Premium medical equipment supplier serving healthcare professionals across the United Kingdom.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Hot Sale</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">Diagnostic Equipment</a></li>
+          <li><a href="#">Patient Monitoring</a></li>
+          <li><a href="#">Surgical Instruments</a></li>
+          <li><a href="#">Mobility Aids</a></li>
+          <li><a href="#">Hospital Furniture</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> 42 Harley Street, London, W1G 9PS</li>
+          <li><i class="fas fa-phone"></i> +44 20 7946 0138</li>
+          <li><i class="fab fa-whatsapp"></i> +44 7445 2295699</li>
+          <li><i class="fas fa-envelope"></i> info@evanstonmedical.co.uk</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Evanston Medical Limited. All rights reserved. Registered in England and Wales.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float Button -->
+<div class="whatsapp-float" onclick="whatsappOrder('medical equipment')">
+  <i class="fab fa-whatsapp"></i>
+</div>
+
+<script>
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+  // WhatsApp Order Function
+  function whatsappOrder(productName) {
+    const phone = "447452295699";
+    const text = `Hello Evanston Medical, I am interested in this product: ${productName}. Please share details and price.`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+  }
+
+  // Close mobile menu when clicking on a link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('show');
+    });
+  });
+
+  // Smooth scroll animation on page load
+  window.addEventListener('load', () => {
+    const elements = document.querySelectorAll('.feature-card, .product-card');
+    elements.forEach((el, index) => {
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.animation = 'fadeInUp 0.6s ease forwards';
+      }, index * 100);
+    });
+  });
+</script>
+</body>
+</html>
